@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent a Car MC</title>
+    <link rel="stylesheet" href="styleee.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" width="200" height="200" alt="XXL Nutrition Logo">
+        <h1>Rent a Car MC</h1>
+        <div id="nava">
+            <nav>
+                <ul>
+                    <li><a href="AutoShow.html"><b>Auto's</b></a></li>
+                    <li><a href="form.html"><b>Toevoegen Auto's</b></a></li>
+                    <li><a href="login_form.php"><b>Inloggen</b></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h2>Ontdek de perfecte voertuigen</h2>
+        <br>
+        <p>Verbeter uw rijplezier met de prachtige auto's.</p>
+        <br>
+        <a href="AutoShow.html" class="cta-button">Bekijk voertuigen</a>
+    </section>
+
+    <section class="products">
+        <article class="product">
+            <img src="Preworkout 1.jpg" alt="Product 1">
+            <h3>Audi RS6 C8</h3>
+            
+            <button class="add-to-cart" data-name="Mercedes-Benz S-Class" data-price="350/D">Boek nu</button>        </article>
+        <article class="product">
+            <img src="preworkout 2.jpg" alt="Product 2">
+            <h3>Mercedes-Benz C63 AMG</h3>
+      
+            <button class="add-to-cart" data-name="Mercedes-Benz S-Class" data-price="300P/D">Boek nu</button> </article>
+        <article class="product">
+            <img src="preworkout 3.jpg" alt="Product 3">
+            <h3>Mercedes-Benz G-wagon </h3>
+            <button class="add-to-cart" data-name="Mercedes-Benz S-Class" data-price="270P/D">Boek nu</button> </article>
+        <article class="product">
+            <img src="Preworkout 4.jpg" alt="Product 4">
+            <h3>BMW M5 CS</h3>
+            <button class="add-to-cart" data-name="Mercedes-Benz S-Class" data-price="300P/D">Boek nu</button> </article>
+    </section>
+
+    <footer>
+        <div class="footer-info">
+            <h3>INFORMATIE</h3>
+            <ul>
+                <li><a href="#">Algemene Voorwaarden</a></li>
+                <li><a href="#">Verzenden & Retourneren</a></li>
+                <li><a href="#">Privacy Verklaring</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-kosso">
+            <h3>Rent a Car MC</h3>
+            <ul>
+                <li><a href="#">Rent a Car MC</a></li>
+                <li><a href="#">Rent a Car MC KLEDING & ACCESSOIRES</a></li>
+               
+            </ul>
+        </div>
+    </footer>
+    <script>
+        
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = button.getAttribute('data-name');
+                    const productPrice = parseFloat(button.getAttribute('data-price'));
+
+                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    cart.push({ name: productName, price: productPrice });
+                    localStorage.setItem('cart', JSON.stringify(cart));
+
+                    window.location.href = 'AutoShow.html';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
