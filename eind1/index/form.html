@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="autov.css">
+    <title>Auto Toevoegen</title>
+</head>
+<body>
+    <h1>Voeg een nieuwe auto toe</h1>
+
+    <form action="process_car.php" method="post">
+        <label for="merk">Merk:</label>
+        <input type="text" name="merk" required><br>
+
+        <label for="model">Model:</label>
+        <input type="text" name="model" required><br>
+
+        <label for="beschikbaarheid">Beschikbaarheid:</label>
+        <select name="beschikbaarheid">
+            <option value="beschikbaar">Beschikbaar</option>
+            <option value="niet_beschikbaar">Niet beschikbaar</option>
+        </select><br>
+
+        <input type="submit" value="Voeg toe">
+    </form>
+    <script>
+        
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = button.getAttribute('data-name');
+                    const productPrice = parseFloat(button.getAttribute('data-price'));
+
+                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    cart.push({ name: productName, price: productPrice });
+                    localStorage.setItem('cart', JSON.stringify(cart));
+
+                    // Nieuwe code om door te verwijzen naar de winkelmandpagina
+                    window.location.href = 'bedankt.php';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
