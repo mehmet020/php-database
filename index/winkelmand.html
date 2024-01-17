@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winkelmand</title>
+    <link rel="stylesheet" href="winkelmand.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" width="150" height="150" alt="XXL Nutrition Logo">
+        <h1><u><a href="index.html" class="cart-link">AutoShow</a></u></h1>
+        <h1>Winkelmand</h1>
+    </header>
+
+    <section class="cart-items">
+        <h1>Uw Winkelmand</h1>
+        <ul id="cart-list"></ul>
+        <p id="total-price">Totaal: €0.00</p>
+        <button id="continue-shopping" disabled>Verder</button><br><button id="clear-cart">Winkelmand legen</button>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="contact-info">
+                <h2>Contactgegevens</h2>
+                <p>Email: info@AutoShow.com</p>
+                <p>Telefoon: +31 (0) 123 456 789</p>
+            </div>
+            <div class="trust-pilot">
+                <h2>Klantbeoordelingen</h2>
+                <p>Bekijk onze beoordelingen op <a href="https://nl.trustpilot.com" target="_blank" class="trustpilot-link">TrustPilot</a></p>
+            </div>
+            <div class="payment-methods">
+                <h2>Veilige Betalingen</h2>
+                <img src="ideal.png" alt="iDEAL">
+                <img src="mastercard.png" alt="Mastercard">
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartList = document.getElementById('cart-list');
+            const totalPrice = document.getElementById('total-price');
+            const continueShoppingButton = document.getElementById('continue-shopping');
+            const clearCartButton = document.getElementById('clear-cart');
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            function updateTotalPrice() {
+                const total = cart.reduce((acc, item) => acc + item.price, 0);
+                totalPrice.textContent = `Totaal: €${total.toFixed(2)}`;
+            }
+
+            function displayCartItems() {
+                cartList.innerHTML = '';
+                cart.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${item.name} - Prijs: €${item.price.toFixed(2)}`;
+                    cartList.appendChild(listItem);
+                });
+                updateTotalPrice();
+            }
+
+            function generateInvoice() {
+                const invoice = cart.map(item => `${item.name} - Prijs: €${item.price.toFixed(2)}`).join('\n');
+                return `Factuur:\n${invoice}\n\n${totalPrice.textContent}`;
+            }
+
+            displayCartItems();
+
+            // Schakel de "Verder" knop uit als de winkelmand leeg is
+            continueShoppingButton.disabled = cart.length === 0;
+
+            continueShoppingButton.addEventListener('click', () => {
+                const invoice = generateInvoice();
+                if (cart.length > 0 && confirm(invoice + '\n\nWilt u doorgaan naar PayPal?')) {
+                    window.location.href = 'https://www.paypal.com/nl/home';
+                }
+            });
+
+            clearCartButton.addEventListener('click', () => {
+                localStorage.removeItem('cart');
+                cart.length = 0;
+                displayCartItems();
+                continueShoppingButton.disabled = true; // Schakel de knop uit na het legen van de winkelmand
+            });
+        });
+    </script>
+</body>
+</html>

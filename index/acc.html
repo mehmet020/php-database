@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inloggen</title>
+    <link rel="stylesheet" href="rofm.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Inloggen</h1>
+        <form class="body-container" action="index.html" method="post">
+            <label for="voornaam">Voornaam:</label><br>
+            <input type="text" id="voornaam" name="voornaam"><br><br>
+
+            <label for="achternaam">Achternaam:</label><br>
+            <input type="text" id="achternaam" name="achternaam"><br><br>
+
+            <label for="Email">Email:</label><br>
+            <input type="text" id="Email" name="Email"><br><br>
+
+            <label for="rol">Wat is je Rol?</label><br><br>
+            <input type="radio" id="student" name="rol" value="student">
+            <label for="student">Klant</label>
+
+            <input type="radio" id="administrator" name="rol" value="administrator">
+            <label for="administrator">Administrator</label><br><br>
+
+            <label for="wachtwoord">Wachtwoord:</label><br>
+            <input type="password" id="password" name="wachtwoord" required><br><br>
+
+            <input type="submit" value="Inloggen" class="login-button">
+        </form>
+    </div>
+</body>
+
+</html>
